@@ -1,3 +1,5 @@
 *.env
 *.pyc
 /sltfluxpy.egg-info
+/dist
+/src/sltfluxpy.egg-info
