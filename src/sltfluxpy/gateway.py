@@ -3,6 +3,7 @@ from websockets.asyncio.client import connect
 import json
 
 async def gatewayconnect(token):
+    global websocket
     async with connect("wss://gateway.fluxer.app?v=1&encoding=json", max_size=10 * 1024 * 1024) as websocket:
         authobj = {"op": 2,"d": {"token": token,"properties": {"os": "Linux","browser": "Fluxer Client","device": "desktop"}}}
         await websocket.send(json.dumps(authobj))
@@ -15,8 +16,8 @@ async def gatewayconnect(token):
 
         async def heartbeat():
             while True:
-                await asyncio.sleep(41.25)
                 await websocket.send(json.dumps({"op": 1,"d": 42}))
+                await asyncio.sleep(41.25)
 
         heartbeat_task = asyncio.create_task(heartbeat())
         receiver_task = asyncio.create_task(receiver())
