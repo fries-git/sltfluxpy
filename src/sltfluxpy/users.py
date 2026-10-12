@@ -17,3 +17,8 @@ def changepronouns(token, pronouns):
 def getuser(token, id):
     response = requests.get(f"https://web.fluxer.app/api/v1/users/{id}",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
     return(response.json())
+
+def getuserpfp(token, id):
+    response = requests.get(f"https://web.fluxer.app/api/v1/users/{id}",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
+    response = response.json()
+    return f"https://fluxerusercontent.com/avatars/{id}/{response["avatar"]}.png"

@@ -1,5 +1,4 @@
 import requests
-from datetime import datetime, timedelta, timezone
 
 def sendmessage(token, channelid, content):
     response = requests.post(f"https://web.fluxer.app/api/v1/channels/{channelid}/messages", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"}, json={"content":content})
@@ -16,3 +15,7 @@ def deletemessage(token, channelid, messageid):
 def getmessage(token, channelid, messageid):
     response = requests.get(f"https://web.fluxer.app/api/v1/channels/{channelid}/messages/{messageid}", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"})
     return(response.json())
+
+def react(token, channelid, messageid, emoji):
+    response = requests.delete(f"https://web.fluxer.app/api/v1/channels/{channelid}/messages/{messageid}/reactions/{emoji}/@me", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"})
+    return(response)
