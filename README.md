@@ -2,9 +2,12 @@
 A selfbotting library to do things like dynamically set bio, and maybe allow custom client creation. This is pretty much exclusively used for HTTP requests, gateway, while it does work, doesnt have the things needed to work in >100 member servers.
 
 ## Functions
+accentcolor(token, hexcolor)  
+changebio(token, bio)  
 changedisplay(token, name)  
 changepronouns(token, pronouns)  
 changestatus(token, status, expirehours)  
+changeuserpfp(token, url)  
 deletemessage(token, channelid, messageid)  
 editmessage(token, channelid, messageid, content)  
 gatewayconnect(token)  

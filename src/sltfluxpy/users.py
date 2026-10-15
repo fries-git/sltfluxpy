@@ -1,5 +1,7 @@
 import requests
 from datetime import datetime, timedelta, timezone
+import base64
+import mimetypes
 
 def changestatus(token, status, expirehours):
     expires_at = (datetime.now(timezone.utc) + timedelta(hours=expirehours)).isoformat(timespec="milliseconds").replace("+00:00", "Z")
@@ -8,6 +10,15 @@ def changestatus(token, status, expirehours):
 
 def changedisplay(token, name):
     response = requests.patch("https://web.fluxer.app/api/v1/users/@me",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"global_name": name},timeout=10)
+    return(response.json())
+
+def changebio(token, bio):
+    response = requests.patch("https://web.fluxer.app/api/v1/users/@me",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"bio": bio},timeout=10)
+    return(response.json())
+
+def changeaccentcolor(token, hexcolor):
+    color = int(hexcolor.replace("#", ""), 16)
+    response = requests.patch("https://web.fluxer.app/api/v1/users/@me",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"accent_color": color},timeout=10)
     return(response.json())
 
 def changepronouns(token, pronouns):
@@ -22,3 +33,20 @@ def getuserpfp(token, id):
     response = requests.get(f"https://web.fluxer.app/api/v1/users/{id}",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
     response = response.json()
     return f"https://fluxerusercontent.com/avatars/{id}/{response["avatar"]}.png"
+
+def changeuserpfp(token, url):
+    try:
+        image = requests.get(url)
+        image.raise_for_status()
+    except:
+        raise RuntimeError("Image Fetch Error")
+
+    mimetype = image.headers.get("Content-Type", "").split(";")[0]
+    if not mimetype.startswith("image/"):
+        raise ValueError("URL did not return an image")
+
+    image_data = base64.b64encode(image.content).decode("utf-8")
+    response = requests.patch("https://api.fluxer.app/v1/users/@me",headers={"Authorization": token,"Content-Type": "application/json"},json={"avatar": f"data:{mimetype};base64,{image_data}"})
+
+    return response
+
