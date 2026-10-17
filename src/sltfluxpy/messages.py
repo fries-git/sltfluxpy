@@ -1,21 +1,25 @@
 import requests
 
-def sendmessage(token, channelid, content):
-    response = requests.post(f"https://web.fluxer.app/api/v1/channels/{channelid}/messages", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"}, json={"content":content})
+def sendmessage(token, channel_id, content):
+    response = requests.post(f"https://web.fluxer.app/api/v1/channels/{channel_id}/messages", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"}, json={"content":content})
     return(response.json())
 
-def editmessage(token, channelid, messageid, content):
-    response = requests.patch(f"https://web.fluxer.app/api/v1/channels/{channelid}/messages/{messageid}", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"}, json={"content":content})
+def editmessage(token, channel_id, message_id, content):
+    response = requests.patch(f"https://web.fluxer.app/api/v1/channels/{channel_id}/messages/{message_id}", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"}, json={"content":content})
     return(response.json())
 
-def deletemessage(token, channelid, messageid):
-    response = requests.delete(f"https://web.fluxer.app/api/v1/channels/{channelid}/messages/{messageid}", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"})
+def deletemessage(token, channel_id, message_id):
+    response = requests.delete(f"https://web.fluxer.app/api/v1/channels/{channel_id}/messages/{message_id}", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"})
     return(response.json())
 
-def getmessage(token, channelid, messageid):
-    response = requests.get(f"https://web.fluxer.app/api/v1/channels/{channelid}/messages/{messageid}", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"})
+def getmessage(token, channel_id, message_id):
+    response = requests.get(f"https://web.fluxer.app/api/v1/channels/{channel_id}/messages/{message_id}", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"})
     return(response.json())
 
-def react(token, channelid, messageid, emoji):
-    response = requests.delete(f"https://web.fluxer.app/api/v1/channels/{channelid}/messages/{messageid}/reactions/{emoji}/@me", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"})
+def react(token, channel_id, message_id, emoji):
+    response = requests.delete(f"https://web.fluxer.app/api/v1/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"})
     return(response)
+
+def getmessages(token, channel_id):
+    response = requests.get(f"https://web.fluxer.app/api/v1/channels/{channel_id}/messages", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app", "limit":"100"})
+    return(response.json())

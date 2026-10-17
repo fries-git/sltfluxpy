@@ -4,6 +4,7 @@ import base64
 import mimetypes
 
 def changestatus(token, status, expirehours):
+    """Changes your status."""
     expires_at = (datetime.now(timezone.utc) + timedelta(hours=expirehours)).isoformat(timespec="milliseconds").replace("+00:00", "Z")
     response = requests.patch("https://web.fluxer.app/api/v1/users/@me/settings",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"custom_status": {"text": status,"expires_at": expires_at}},timeout=10)
     return(response.json())

@@ -3,3 +3,4 @@
 /sltfluxpy.egg-info
 /dist
 /src/sltfluxpy.egg-info
+*clientdemo.py
