@@ -20,6 +20,10 @@ def react(token, channel_id, message_id, emoji):
     response = requests.delete(f"https://web.fluxer.app/api/v1/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"})
     return(response)
 
-def getmessages(token, channel_id):
-    response = requests.get(f"https://web.fluxer.app/api/v1/channels/{channel_id}/messages", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app", "limit":"100"})
-    return(response.json())
+def getmessages(token, channel_id, count):
+    response = requests.get(f"https://web.fluxer.app/api/v1/channels/{channel_id}/messages",headers={"Authorization": token,"Origin": "https://web.fluxer.app"},params={"limit": count})
+    return response.json()
+
+def getmessagesbeforeid(token, channel_id, count, before_id):
+    response = requests.get(f"https://web.fluxer.app/api/v1/channels/{channel_id}/messages",headers={"Authorization": token,"Origin": "https://web.fluxer.app"},params={"before": before_id, "limit": count})
+    return response.json()

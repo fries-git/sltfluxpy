@@ -5,6 +5,7 @@ import json
 async def gatewayconnect(token, subscriptions):
     global websocket
     async with connect("wss://gateway.fluxer.app?v=1&encoding=json", max_size=10 * 1024 * 1024) as websocket:
+        print("✔ Connecting...")
         authobj = {"op": 2,"d": {"token": token,"properties": {"os": "Linux","browser": "Fluxer Client","device": "desktop"}}}
         await websocket.send(json.dumps(authobj))
 
@@ -23,6 +24,8 @@ async def gatewayconnect(token, subscriptions):
         receiver_task = asyncio.create_task(receiver())
         for id in subscriptions:
             await lazyrequest(websocket, id)
+            await asyncio.sleep(.1)
+        print("✔ Done subscribing to channels, websocket ready!")
         try:
             while True:
                 message = await queue.get()

@@ -1,4 +1,4 @@
-from sltfluxpy import gateway, sendmessage, getchanneldata
+from sltfluxpy import *
 import os
 from dotenv import load_dotenv
 import asyncio
@@ -6,7 +6,7 @@ import asyncio
 load_dotenv()
 token = os.getenv("FLUXTOKEN")
 
-guildids = ["1472374293066228010", "1473443172612104279"]
+guildids = [guild["id"] for guild in getguilds(token)]
 
 async def connect():
     async for data in gateway.gatewayconnect(token, guildids):
@@ -24,8 +24,8 @@ async def connect():
             if guild_id in guildids:
                 if content:
                     print(f"{channel["name"]}:{name} - {content}")
-                    if content == "fr&ping":
-                        await asyncio.to_thread(sendmessage, token, channel_id, "Pong!")
+                    if "yogurt" in content.lower():
+                        await asyncio.to_thread(sendmessage, token, channel_id, "Yo, whats up.")
 
 if __name__ == "__main__":
     asyncio.run(connect())
