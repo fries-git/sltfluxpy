@@ -8,6 +8,8 @@ https://fluxer.js.org/rest/
 https://docs.fluxer.app/  
 https://fluxer.app/  
 
+https://drive.google.com/file/d/1SJx9MsXBhVgS72NPLRvlWOQIia6MxEbL/view?usp=sharing  
+
 ## All functions
 ```
 changeaccentcolor(token, hexcolor)  
