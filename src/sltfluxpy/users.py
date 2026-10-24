@@ -35,7 +35,7 @@ def getuserpfp(token, id):
     response = response.json()
     return f"https://fluxerusercontent.com/avatars/{id}/{response["avatar"]}.png"
 
-def changeuserpfp(token, url):
+def changepfp(token, url):
     try:
         image = requests.get(url)
         image.raise_for_status()
@@ -51,3 +51,7 @@ def changeuserpfp(token, url):
 
     return response
 
+def getnote(token, userid):
+    response = requests.get(f"https://web.fluxer.app/api/v1/users/@me/notes/{userid}",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
+    return(response.json())
+    

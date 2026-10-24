@@ -22,9 +22,8 @@ async def gatewayconnect(token, subscriptions):
         
         heartbeat_task = asyncio.create_task(heartbeat())
         receiver_task = asyncio.create_task(receiver())
-        for id in subscriptions:
-            await lazyrequest(websocket, id)
-            await asyncio.sleep(.1)
+        await lazyrequest(websocket, subscriptions)
+        
         print("✔ Done subscribing to channels, websocket ready!")
         try:
             while True:
@@ -35,5 +34,5 @@ async def gatewayconnect(token, subscriptions):
             heartbeat_task.cancel()
             receiver_task.cancel()
 
-async def lazyrequest(websocket, serverid):
-    await websocket.send(json.dumps({"op": 14,"d": {"subscriptions": {str(serverid): {"active": True,"typing": True}}}}))
+async def lazyrequest(websocket, message):
+    await websocket.send(json.dumps(message))

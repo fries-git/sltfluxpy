@@ -1,13 +1,11 @@
-from sltfluxpy import getguildchannels, getmessages
+from sltfluxpy import *
 import os
 from dotenv import load_dotenv
+import time
 
 load_dotenv()
 token = os.getenv("FLUXTOKEN")
-guild_id = "1472374293066228010"
 
-channels = getguildchannels(token, guild_id)
-
-if channels:
-    channel_id = str(channels[2]["id"])
-    print("MESSAGES:", repr(getmessages(token, channel_id, 1)))
+id = sendmessage(token, 1485743778301133291, "Stardance Demo!")["id"]
+time.sleep(5)
+editmessage(token, 1485743778301133291, id, "Stardance Demo but I edited the message!")

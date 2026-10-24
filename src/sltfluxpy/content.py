@@ -15,3 +15,10 @@ def getguildchannels(token, guild_id):
 def getguilds(token):
     response = requests.get(f"https://web.fluxer.app/api/v1/users/@me/guilds", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"})
     return(response.json())
+
+def generateguildlist(token):
+    return {"op": 14,"d": {"subscriptions":{"0": {"active": True, "sync": False, "typing": False}, **{str(guild["id"]): {"active": True,"sync": False,"typing": False}for guild in getguilds(token)}}}}
+
+def getgateway(token):
+    response = requests.get(f"https://web.fluxer.app/api/v1/gateway/bot",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
+    return (response.json())
