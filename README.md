@@ -1,26 +1,9 @@
 # Sltfluxpy
-A selfbotting library to do things like dynamically set bio, and maybe allow custom client creation. This is pretty much exclusively used for HTTP requests, gateway, while it does work, doesnt have the things needed to work in >100 member servers.
+A selfbotting library to do things like dynamically set bio, and maybe allow custom client creation.  
+This was created using the docs the fluxer.js provided as well as official fluxer docs.  
+So far I've put about 10 hours into it, feels pretty good, and im liking how it works.  
+The first thing I'm making is good Spotify linking program. Use premium to set status to song.  
 
-## Functions
-changeaccentcolor(token, hexcolor)  
-changebio(token, bio)  
-changedisplay(token, name)  
-changepronouns(token, pronouns)  
-changestatus(token, status, expirehours)  
-changeuserpfp(token, url)  
-deletemessage(token, channel_id, message_id)  
-editmessage(token, channel_id, message_id, content)  
-gatewayconnect(token, subscriptions)  
-getchanneldata(token, channel_id)  
-getemojidata(token, emoji_id)  
-getguildchannels(token, guild_id)  
-getguilds(token)  
-getmessage(token, channel_id, message_id)  
-getmessages(token, channel_id)  
-getuser(token, id)  
-getuserpfp(token, id)  
-github()  
-lazyrequest(websocket, serverid)  
-login(email, password)  
-react(token, channel_id, message_id, emoji)  
-sendmessage(token, channel_id, content)  
+https://fluxer.js.org/rest/  
+https://docs.fluxer.app/  
+https://fluxer.app/  
