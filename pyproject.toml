@@ -4,12 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sltfluxpy"
-version = "0.1.2"
+version = "0.2.1"
 readme = "README.md"
 description = "A piss easy wrapper for the Fluxer Rest/Gateway API"
 requires-python = ">=3.10"
 dependencies = [
-    "requests>=2.31.0"
+    "requests>=2.31.0",
+    "altcha"
 ]
 
 [tool.setuptools]

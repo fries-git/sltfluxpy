@@ -10,7 +10,7 @@ def editmessage(token, channel_id, message_id, content):
 
 def deletemessage(token, channel_id, message_id):
     response = requests.delete(f"https://web.fluxer.app/api/v1/channels/{channel_id}/messages/{message_id}", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"})
-    return(response.json())
+    return("Message deleted.")
 
 def getmessage(token, channel_id, message_id):
     response = requests.get(f"https://web.fluxer.app/api/v1/channels/{channel_id}/messages/{message_id}", headers={"Authorization": token,"Content-Type": "application/json", "Origin":"https://web.fluxer.app"})
