@@ -5,6 +5,6 @@ from sltfluxpy import *
 dotenv.load_dotenv()
 
 email, password = os.getenv("EMAIL"), os.getenv("PASSWORD")
-login = login(email, password)
-usertoken = login["token"]
-changestatus(usertoken, "LOGINS WORK IN MY PYTHON LIB", 1)
+settoken(login(email, password)["token"])
+sendmessage(1550942247631982595, "test")
+logout()

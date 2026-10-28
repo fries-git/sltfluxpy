@@ -4,3 +4,6 @@ from .users import *
 from .misc import *
 from .gateway import *
 from .content import *
+from .config import *
+from .log import *
+from .instance import *

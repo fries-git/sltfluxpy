@@ -1,16 +1,17 @@
-from sltfluxpy import login, sendmessage, generateguildlist, gateway, getchanneldata
+from sltfluxpy import *
 import os
 from dotenv import load_dotenv
 import asyncio
 
 load_dotenv()
 email, pwrd = os.getenv("EMAIL"), os.getenv("PASSWORD")
-token = login(email, pwrd)["token"]
+token = login(email, pwrd)
+settoken(token)
 
 async def connect():
-    guildlist = generateguildlist(token)
+    guildlist = generateguildlist()
     print(guildlist)
-    async for data in gateway.gatewayconnect(token, guildlist):
+    async for data in gateway.gatewayconnect(guildlist):
         event = data.get("t")
         payload = data.get("d")
         if event == "MESSAGE_CREATE":
@@ -19,13 +20,13 @@ async def connect():
             content = payload["content"]
             channel_id = payload["channel_id"]
             guild_id = payload["guild_id"]
-            channel = getchanneldata(token, channel_id)
+            channel = getchanneldata(channel_id)
             
             if content:
                 print(f"{channel["name"]}:{name} - {content}")
-                if "slab" in content.lower():
+                if "!slab" in content.lower():
                     if not "return the slab..." in content.lower():
-                        await asyncio.to_thread(sendmessage, token, channel_id, "-# return the slab...")
+                        await asyncio.to_thread(sendmessage, channel_id, "-# return the slab...")
 
 if __name__ == "__main__":
     asyncio.run(connect())

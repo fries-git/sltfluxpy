@@ -1,37 +1,47 @@
 ## All functions
 ```
-changeaccentcolor(token, hexcolor)  
-changebio(token, bio)  
-changedisplay(token, name)  
-changepfp(token, url)  
-changepronouns(token, pronouns)  
-changestatus(token, status, expirehours)  
-deletemessage(token, channel_id, message_id)  
-editmessage(token, channel_id, message_id, content)  
-gatewayconnect(token, subscriptions)  
-generateguildlist(token)  
-getchanneldata(token, channel_id)  
-getemojidata(token, emoji_id)  
-getgateway(token) *(seems to be busted which is crazy considering its like the simplest thing)*
-getguildchannels(token, guild_id)  
-getguilds(token)  
-getmessage(token, channel_id, message_id)  
-getmessages(token, channel_id, count)  
-getmessagesbeforeid(token, channel_id, count, before_id)  
-getnote(token, userid)  
-getuser(token, id)  
-getuserpfp(token, id)  
+settoken(token)  
+  
+changeaccentcolor(hexcolor)  
+changebio(bio)  
+changedisplay(name)  
+changepfp(url)  
+changepronouns(pronouns)  
+changestatus(status, expirehours)  
+deletemessage(channel_id, message_id)  
+docs()  
+editmessage(channel_id, message_id, content)  
+error(input)  
+gatewayconnect(subscriptions)  
+generateguildlist()  
+getchanneldata(channel_id)  
+getemojidata(emoji_id)  
+getgateway()  
+getguildchannels(guild_id)  
+getguilds()  
+getmessage(channel_id, message_id)  
+getmessages(channel_id, count)  
+getmessagesbeforeid(channel_id, count, before_id)  
+getnote(userid)  
+getuser(id)  
+getuserpfp(id)  
 github()  
 lazyrequest(websocket, message)  
-login(email, password) *(does not work due to captcha)*
-react(token, channel_id, message_id, emoji) *(seems to be broken idk)*
-sendmessage(token, channel_id, content)  
+login(email, password)  
+logout()  
+logoutmanual(token)  
+react(channel_id, message_id, emoji)  
+readme()  
+sendmessage(channel_id, content)  
+success(input)  
 ```
 
 ## How to Use
 *Note that things like email/password should be in the .env file.*  
+*To set token use `settoken(token)`*
 
 ### Login:
+-# **Note that login is considered a currently "dangerous" function that results in hard ratelimiting and I have to fix it.**
 
 ```py
 from sltfluxpy import login
@@ -43,7 +53,7 @@ usertoken = login["token"]
 ```
 ### Gateway:
 
-```python
+```py
 import asyncio
 from sltfluxpy import login, sendmessage, generateguildlist, gateway, getchanneldata
 
