@@ -7,3 +7,4 @@ from .content import *
 from .config import *
 from .log import *
 from .instance import *
+from .guilds import *

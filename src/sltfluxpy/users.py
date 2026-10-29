@@ -67,3 +67,13 @@ def getnote(userid):
     token = config.token
     response = requests.get(f"https://web.fluxer.app/api/v1/users/@me/notes/{userid}",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
     return(response.json())
+
+def setnote(userid, content):
+    token = config.token
+    response = requests.put(f"https://web.fluxer.app/api/v1/users/@me/notes/{userid}",json={"note":content},headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
+    return("Note set successfully.")
+
+def getcurrentuser():
+    token = config.token
+    response = requests.get(f"https://web.fluxer.app/api/v1/users/@me",headers={"Authorization":token, "Content-Type": "application/json","Origin": "https://web.fluxer.app"})
+    return(response.json())
