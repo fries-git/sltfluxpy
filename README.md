@@ -6,6 +6,8 @@ https://fluxer.js.org/rest/
 https://docs.fluxer.app/  
 https://fluxer.app/  
 
+Used Libraries: Rich, Requests, asyncio, and a handful of built in like json.
+
 # Sltfluxpy Docs
 Welcome! To begin you must first install the library using:
 ```
