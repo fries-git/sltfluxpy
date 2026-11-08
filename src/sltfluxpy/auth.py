@@ -6,8 +6,9 @@ from . import config
 import time
 
 def login(email, password):
+    api = config.api
     js = {"email": email,"password": password}
-    response = requests.post("https://web.fluxer.app/api/v1/auth/login", headers={"Content-Type": "application/json", "Origin": "https://web.fluxer.app"}, json=js)
+    response = requests.post("{api}/auth/login", headers={"Content-Type": "application/json", "Origin": "https://web.fluxer.app"}, json=js)
     resp = response.json()
     resp = resp["altcha_challenge"]
     
@@ -18,15 +19,17 @@ def login(email, password):
 
     time.sleep(1)
 
-    response = requests.post("https://web.fluxer.app/api/v1/auth/login", headers={"Content-Type": "application/json", "Origin": "https://web.fluxer.app", "X-Captcha-Token": token}, json=js)
+    response = requests.post(f"{api}/auth/login", headers={"Content-Type": "application/json", "Origin": "https://web.fluxer.app", "X-Captcha-Token": token}, json=js)
     config.settoken(response.json()["token"])
     return (response.json())
 
 def logoutmanual(token):
-    response = requests.post("https://web.fluxer.app/api/v1/auth/logout", headers={"Authorization": token, "Content-Type": "application/json", "Origin": "https://web.fluxer.app"})
+    api = config.api
+    response = requests.post(f"{api}/auth/logout", headers={"Authorization": token, "Content-Type": "application/json", "Origin": "https://web.fluxer.app"})
     return("Logged out.")
 
 def logout():
     token = config.token
-    response = requests.post("https://web.fluxer.app/api/v1/auth/logout", headers={"Authorization": token, "Content-Type": "application/json", "Origin": "https://web.fluxer.app"})
+    api = config.api
+    response = requests.post(f"{api}/auth/logout", headers={"Authorization": token, "Content-Type": "application/json", "Origin": "https://web.fluxer.app"})
     return("Logged out.")

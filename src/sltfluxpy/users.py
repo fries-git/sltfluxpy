@@ -8,39 +8,46 @@ advancedlog = config.advanced_logging
 
 def changestatus(status, expirehours):
     token = config.token
+    api = config.api
     expires_at = (datetime.now(timezone.utc) + timedelta(hours=expirehours)).isoformat(timespec="milliseconds").replace("+00:00", "Z")
-    response = requests.patch("https://web.fluxer.app/api/v1/users/@me/settings",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"custom_status": {"text": status,"expires_at": expires_at}},timeout=10)
+    response = requests.patch(f"{api}/users/@me/settings",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"custom_status": {"text": status,"expires_at": expires_at}},timeout=10)
     return(response.json())
 
 def changedisplay(name):
     token = config.token
-    response = requests.patch("https://web.fluxer.app/api/v1/users/@me",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"global_name": name},timeout=10)
+    api = config.api
+    response = requests.patch(f"{api}/users/@me",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"global_name": name},timeout=10)
     return(response.json())
 
 def changebio(bio):
     token = config.token
-    response = requests.patch("https://web.fluxer.app/api/v1/users/@me",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"bio": bio},timeout=10)
+    api = config.api
+    response = requests.patch(f"{api}/users/@me",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"bio": bio},timeout=10)
     return(response.json())
-
+        
 def changeaccentcolor(hexcolor):
     token = config.token
+    api = config.api
     color = int(hexcolor.replace("#", ""), 16)
-    response = requests.patch("https://web.fluxer.app/api/v1/users/@me",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"accent_color": color},timeout=10)
+    response = requests.patch(f"{api}/users/@me",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"accent_color": color},timeout=10)
     return(response.json())
 
 def changepronouns(pronouns):
     token = config.token
-    response = requests.patch("https://web.fluxer.app/api/v1/users/@me",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"pronouns": pronouns},timeout=10)
+    api = config.api
+    response = requests.patch(f"{api}/users/@me",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"},json={"pronouns": pronouns},timeout=10)
     return(response.json())
 
 def getuser(id):
     token = config.token
-    response = requests.get(f"https://web.fluxer.app/api/v1/users/{id}",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
+    api = config.api
+    response = requests.get(f"{api}/users/{id}",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
     return(response.json())
 
 def getuserpfp(id):
     token = config.token
-    response = requests.get(f"https://web.fluxer.app/api/v1/users/{id}",headers={"Authorization":token, "Content-Type": "application/json","Origin": "https://web.fluxer.app"})
+    api = config.api
+    response = requests.get(f"{api}/users/{id}",headers={"Authorization":token, "Content-Type": "application/json","Origin": "https://web.fluxer.app"})
     response = response.json()
     success(response)
     response = response["avatar"]
@@ -48,6 +55,7 @@ def getuserpfp(id):
 
 def changepfp(url):
     token = config.token
+    api = config.api
     try:
         image = requests.get(url)
         image.raise_for_status()
@@ -65,15 +73,18 @@ def changepfp(url):
 
 def getnote(userid):
     token = config.token
-    response = requests.get(f"https://web.fluxer.app/api/v1/users/@me/notes/{userid}",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
+    api = config.api
+    response = requests.get(f"{api}/users/@me/notes/{userid}",headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
     return(response.json())
 
 def setnote(userid, content):
     token = config.token
-    response = requests.put(f"https://web.fluxer.app/api/v1/users/@me/notes/{userid}",json={"note":content},headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
+    api = config.api
+    response = requests.put(f"{api}/users/@me/notes/{userid}",json={"note":content},headers={"Authorization": token,"Content-Type": "application/json","Origin": "https://web.fluxer.app"})
     return("Note set successfully.")
 
 def getcurrentuser():
     token = config.token
-    response = requests.get(f"https://web.fluxer.app/api/v1/users/@me",headers={"Authorization":token, "Content-Type": "application/json","Origin": "https://web.fluxer.app"})
+    api = config.api
+    response = requests.get(f"{api}/users/@me",headers={"Authorization":token, "Content-Type": "application/json","Origin": "https://web.fluxer.app"})
     return(response.json())

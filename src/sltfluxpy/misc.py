@@ -3,7 +3,7 @@ from rich.markdown import Markdown
 import requests
 
 def github():
-    return("><> Come support and fork the project at: https://github.com/fries-git/sltfluxpy <><")
+    print("><> Come support and fork the project at: https://github.com/fries-git/sltfluxpy <><")
 
 def readme():
     console = Console()

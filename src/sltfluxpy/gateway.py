@@ -8,8 +8,9 @@ advancedlog = config.advanced_logging
 
 async def gatewayconnect(subscriptions):
     token = config.token
+    gatewayapi = config.gatewayapi
     global websocket
-    async with connect("wss://gateway.fluxer.app?v=1&encoding=json", max_size=10 * 1024 * 1024) as websocket:
+    async with connect(gatewayapi, max_size=10 * 1024 * 1024) as websocket:
         log.success("Connected to gateway!")
         authobj = {"op": 2,"d": {"token": token,"properties": {"os": "Linux","browser": "Fluxer Client","device": "desktop"}}}
         await websocket.send(json.dumps(authobj))
